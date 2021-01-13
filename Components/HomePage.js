@@ -4,27 +4,38 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import RegisterPage from "./RegisterPage";
-import InputBox from "./InputBox";
+import { useState } from "react";
 
 function HomePage({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <View style={{ padding: 50, backgroundColor: "white" }}>
       <View>
         <Text style={styles.mainTitle}>Smart Parking </Text>
       </View>
 
-      <View style={{padding:80}}></View>
+      <View style={{ padding: 80 }}></View>
 
       <>
         <View>
-          <InputBox name="Email"></InputBox>
+          <TextInput
+            style={styles.textInput}
+            placeholder="Email"
+            onChangeText={(email) => setEmail(email)}
+          ></TextInput>
         </View>
       </>
 
       <View style={{ padding: 5 }}></View>
 
       <View>
-        <InputBox name="Password"></InputBox>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Password"
+          onChangeText={(password) => setPassword(password)}
+        ></TextInput>
       </View>
 
       <TouchableOpacity style={styles.button}>
@@ -59,10 +70,10 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     marginLeft: 90,
     marginRight: 90,
-    backgroundColor: "grey",
+    backgroundColor: "#003FB6",
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "grey",
+    borderColor: "yellow",
     alignContent: "center",
   },
 
@@ -70,6 +81,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
+  },
+
+  textInput: {
+    borderColor: "black",
+    borderWidth: 1,
+    padding: 15,
   },
 });
 
