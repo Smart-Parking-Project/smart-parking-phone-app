@@ -5,79 +5,28 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 
-export default function RegisterPage() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+import RegisterForm from "./RegisterForm";
 
+export default function RegisterPage() {
   return (
     <View style={{ padding: 20, backgroundColor: "white" }}>
-      <View>
-        <Text style={styles.mainTitle}>Register</Text>
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View>
+          <View>
+            <Text style={styles.mainTitle}>Register</Text>
+          </View>
 
-      <View style={{ padding: 20 }}></View>
+          <View style={{ padding: 20 }}></View>
 
-      <View>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Username"
-          onChangeText={(username) => setUsername(username)}
-        ></TextInput>
-      </View>
+          <RegisterForm></RegisterForm>
 
-      <View style={{ padding: 5 }}></View>
-
-      <View>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Email"
-          onChangeText={(email) => setEmail(email)}
-        ></TextInput>
-      </View>
-
-      <View style={{ padding: 5 }}></View>
-
-      <View>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Password"
-          onChangeText={(password) => setPassword(password)}
-        ></TextInput>
-      </View>
-
-      <View style={{ padding: 5 }}></View>
-
-      <View>
-        <TextInput
-          style={styles.textInput}
-          placeholder="First Name"
-          onChangeText={(firstName) => setFirstName(firstName)}
-        ></TextInput>
-      </View>
-
-      <View style={{ padding: 5 }}></View>
-
-      <View>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Last Name"
-          onChangeText={(lastName) => setLastName(lastName)}
-        ></TextInput>
-      </View>
-
-      <View style={{ padding: 15 }}></View>
-
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.text}>Create Account</Text>
-      </TouchableOpacity>
-
-      <View style={{ padding: 65 }}></View>
+          <View style={{ padding: 65 }}></View>
+        </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 }
