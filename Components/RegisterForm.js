@@ -38,7 +38,7 @@ export default function RegisterForm() {
           <View>
             <TextInput
               style={styles.textInput}
-              placeholder="Username"
+              placeholder="Username*"
               onChangeText={props.handleChange("username")}
               //value={props.values.username}
               onBlur={props.handleBlur("username")}
@@ -50,7 +50,7 @@ export default function RegisterForm() {
 
             <TextInput
               style={styles.textInput}
-              placeholder="Email"
+              placeholder="Email*"
               onChangeText={props.handleChange("email")}
               //value={props.values.email}
               onBlur={props.handleBlur("email")}
@@ -62,7 +62,7 @@ export default function RegisterForm() {
 
             <TextInput
               style={styles.textInput}
-              placeholder="Password"
+              placeholder="Password*"
               onChangeText={props.handleChange("password")}
               //value={props.values.password}
               onBlur={props.handleBlur("password")}
@@ -97,7 +97,7 @@ export default function RegisterForm() {
               {props.touched.lastName && props.errors.lastName}
             </Text>
 
-            <View style={{ padding: 15 }}></View>
+            <View></View>
 
             <TouchableOpacity
               style={styles.button}
@@ -139,8 +139,8 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     fontWeight: "bold",
-    marginBottom: 10,
-    marginTop: 6,
+    marginBottom: 5,
+    marginTop: 3,
     textAlign: "center",
   },
 });
