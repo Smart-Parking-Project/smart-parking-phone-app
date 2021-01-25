@@ -14,7 +14,7 @@ const HomePageSchema = yup.object({
   password: yup.string().required(),
 });
 
-export default function HomePageForm() {
+export default function HomePageForm(navigation) {
   return (
     <View>
       <Formik
@@ -25,6 +25,7 @@ export default function HomePageForm() {
         validationSchema={HomePageSchema}
         onSubmit={(values, actions) => {
           console.log(values);
+          navigation.navigate("Dashboard");
           actions.resetForm();
         }}
       >
@@ -35,7 +36,7 @@ export default function HomePageForm() {
               placeholder="Email"
               placeholderTextColor="white"
               onChangeText={props.handleChange("email")}
-              //value={props.values.email}
+              value={props.values.email}
               onBlur={props.handleBlur("email")}
             ></TextInput>
 
@@ -48,7 +49,7 @@ export default function HomePageForm() {
               placeholder="Password"
               placeholderTextColor="white"
               onChangeText={props.handleChange("password")}
-              //value={props.values.password}
+              value={props.values.password}
               onBlur={props.handleBlur("password")}
             ></TextInput>
 

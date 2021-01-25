@@ -1,5 +1,5 @@
 import React from "react";
-import AppNavigator from "./Components/HomePage";
+import AppNavigator from "./Components/HomePage/HomePage";
 import { AppRegistry, View, Text } from "react-native";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 

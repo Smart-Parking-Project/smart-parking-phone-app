@@ -20,11 +20,11 @@ export default function RegisterPage() {
             <Text style={styles.mainTitle}>Register</Text>
           </View>
 
-          <View style={{ padding: 20 }}></View>
+          <View style={{ padding: 15 }}></View>
 
           <RegisterForm></RegisterForm>
 
-          <View style={{ padding: 65 }}></View>
+          <View style={{ padding: 50 }}></View>
         </View>
       </TouchableWithoutFeedback>
     </View>

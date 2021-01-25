@@ -8,16 +8,61 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
+//import ADD_NEW_USER from "../GraphQL/mutations";
+import { useMutation, gql } from "@apollo/client";
+import { useState } from "react/cjs/react.development";
 
 const RegisterSchema = yup.object({
   username: yup.string().required().min(8),
   email: yup.string().required(),
   password: yup.string().required().min(8),
+  confirmPassword: yup.string().required().min(8),
   firstName: yup.string(),
   lastName: yup.string(),
 });
 
+const ADD_NEW_USER = gql`
+  mutation createNewUser(
+    $username: String!
+    $email: String!
+    $password: String!
+    $confirmPassword: String!
+    $firstName: String
+    $lastName: String
+  ) {
+    createNewUser(
+      newUser: {
+        username: $username
+        email: $email
+        password: $password
+        confirmPassword: $confirmPassword
+        firstName: $firstName
+        lastName: $lastName
+      }
+    ) {
+      token
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+      }
+    }
+  }
+`;
+
 export default function RegisterForm() {
+  const [errors, setErrors] = useState({});
+  const [addUser, { loading }] = useMutation(ADD_NEW_USER, {
+    update(_, result) {
+      console.log("Registered User");
+    },
+    onError(err) {
+      setErrors(err.graphQLErrors[0].extensions.exception.errors);
+    },
+  });
+
   return (
     <View>
       <Formik
@@ -25,13 +70,25 @@ export default function RegisterForm() {
           username: " ",
           email: " ",
           password: " ",
+          confirmPassword: " ",
           firstName: " ",
           lastName: " ",
         }}
         validationSchema={RegisterSchema}
+        //onSubmit={onSubmit}
         onSubmit={(values, actions) => {
           console.log(values);
           actions.resetForm();
+          addUser({
+            variables: {
+              username: values.username,
+              email: values.email,
+              password: values.password,
+              confirmPassword: values.confirmPassword,
+              firstName: values.firstName,
+              lastName: values.lastName,
+            },
+          });
         }}
       >
         {(props) => (
@@ -40,8 +97,9 @@ export default function RegisterForm() {
               style={styles.textInput}
               placeholder="Username*"
               onChangeText={props.handleChange("username")}
-              //value={props.values.username}
+              value={props.values.username}
               onBlur={props.handleBlur("username")}
+              error={!!errors.username}
             ></TextInput>
 
             <Text style={styles.errorText}>
@@ -52,8 +110,9 @@ export default function RegisterForm() {
               style={styles.textInput}
               placeholder="Email*"
               onChangeText={props.handleChange("email")}
-              //value={props.values.email}
+              value={props.values.email}
               onBlur={props.handleBlur("email")}
+              error={!!errors.email}
             ></TextInput>
 
             <Text style={styles.errorText}>
@@ -64,8 +123,9 @@ export default function RegisterForm() {
               style={styles.textInput}
               placeholder="Password*"
               onChangeText={props.handleChange("password")}
-              //value={props.values.password}
+              value={props.values.password}
               onBlur={props.handleBlur("password")}
+              error={!!errors.password}
             ></TextInput>
 
             <Text style={styles.errorText}>
@@ -74,10 +134,24 @@ export default function RegisterForm() {
 
             <TextInput
               style={styles.textInput}
+              placeholder="Confirm Password*"
+              onChangeText={props.handleChange("confirmPassword")}
+              value={props.values.confirmPassword}
+              onBlur={props.handleBlur("confirmPassword")}
+              error={!!errors.confirmPassword}
+            ></TextInput>
+
+            <Text style={styles.errorText}>
+              {props.touched.confirmPassword && props.errors.confirmPassword}
+            </Text>
+
+            <TextInput
+              style={styles.textInput}
               placeholder="First Name"
               onChangeText={props.handleChange("firstName")}
-              //value={props.values.firstName}
+              value={props.values.firstName}
               onBlur={props.handleBlur("firstName")}
+              error={!!errors.firstName}
             ></TextInput>
 
             <Text style={styles.errorText}>
@@ -88,8 +162,9 @@ export default function RegisterForm() {
               style={styles.textInput}
               placeholder="Last Name"
               onChangeText={props.handleChange("lastName")}
-              //value={props.values.lastName}
+              value={props.values.lastName}
               onBlur={props.handleBlur("lastName")}
+              error={!!errors.lastName}
             ></TextInput>
 
             <Text style={styles.errorText}>

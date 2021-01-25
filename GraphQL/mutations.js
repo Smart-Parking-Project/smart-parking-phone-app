@@ -1,0 +1,33 @@
+//import { gql, useMutation } from "@apollo/client";
+import gql from "graphql-tag";
+
+export const ADD_NEW_USER = gql`
+  mutation createNewUser(
+    $username: String!
+    $email: String!
+    $password: String!
+    $confirmPassword: String!
+    $firstName: String
+    $lastName: String
+  ) {
+    createNewUser(
+      newUser: {
+        username: $username
+        email: $email
+        password: $password
+        confirmPassword: $confirmPassword
+        firstName: $firstName
+        lastName: $lastName
+      }
+    ) {
+      token
+      user {
+        id
+        username
+        email
+        firstName
+        lastName
+      }
+    }
+  }
+`;
