@@ -12,6 +12,13 @@ export default function Dashboard({ navigation }) {
   return (
     <View style={{ padding: 20 }}>
       <View>
+        <View>
+          <Text style={styles.mainTitle}>Dashboard</Text>
+        </View>
+      </View>
+
+      <View style={{ padding: 20 }}></View>
+      <View>
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("Parking Map")}
@@ -70,5 +77,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     color: "white",
+  },
+  mainTitle: {
+    fontSize: 40,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "black",
   },
 });

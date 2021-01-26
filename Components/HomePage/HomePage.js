@@ -178,10 +178,14 @@ function AppNavigator() {
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}
-          options={{ headerLeft: null }}
+          options={{ headerLeft: null, title: " " }}
         ></Stack.Screen>
         <Stack.Screen name="Parking Map" component={ParkingMap}></Stack.Screen>
-        <Stack.Screen name="Payment" component={Payment}></Stack.Screen>
+        <Stack.Screen
+          name="Payment"
+          component={Payment}
+          //options={{ title: "" }}
+        ></Stack.Screen>
         <Stack.Screen name="AccountInfo" component={AccountInfo}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

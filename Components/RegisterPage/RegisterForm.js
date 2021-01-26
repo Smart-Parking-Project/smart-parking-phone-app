@@ -53,7 +53,6 @@ const ADD_NEW_USER = gql`
 `;
 
 export default function RegisterForm() {
-  const [errors, setErrors] = useState({});
   const [addUser, { loading }] = useMutation(ADD_NEW_USER, {
     update(_, result) {
       console.log("Registered User");
@@ -99,7 +98,6 @@ export default function RegisterForm() {
               onChangeText={props.handleChange("username")}
               value={props.values.username}
               onBlur={props.handleBlur("username")}
-              error={!!errors.username}
             ></TextInput>
 
             <Text style={styles.errorText}>
@@ -112,7 +110,6 @@ export default function RegisterForm() {
               onChangeText={props.handleChange("email")}
               value={props.values.email}
               onBlur={props.handleBlur("email")}
-              error={!!errors.email}
             ></TextInput>
 
             <Text style={styles.errorText}>
@@ -125,7 +122,6 @@ export default function RegisterForm() {
               onChangeText={props.handleChange("password")}
               value={props.values.password}
               onBlur={props.handleBlur("password")}
-              error={!!errors.password}
             ></TextInput>
 
             <Text style={styles.errorText}>
@@ -138,7 +134,6 @@ export default function RegisterForm() {
               onChangeText={props.handleChange("confirmPassword")}
               value={props.values.confirmPassword}
               onBlur={props.handleBlur("confirmPassword")}
-              error={!!errors.confirmPassword}
             ></TextInput>
 
             <Text style={styles.errorText}>
@@ -151,7 +146,6 @@ export default function RegisterForm() {
               onChangeText={props.handleChange("firstName")}
               value={props.values.firstName}
               onBlur={props.handleBlur("firstName")}
-              error={!!errors.firstName}
             ></TextInput>
 
             <Text style={styles.errorText}>
@@ -164,7 +158,6 @@ export default function RegisterForm() {
               onChangeText={props.handleChange("lastName")}
               value={props.values.lastName}
               onBlur={props.handleBlur("lastName")}
-              error={!!errors.lastName}
             ></TextInput>
 
             <Text style={styles.errorText}>
