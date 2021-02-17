@@ -6,12 +6,57 @@ import {
   View,
   TextInput,
   TouchableWithoutFeedback,
+  TouchableOpacity,
   Keyboard,
 } from "react-native";
 
+import { Formik } from "formik";
+import * as yup from "yup";
+import { useMutation, gql } from "@apollo/client";
+
+import RegisterForm1 from "./RegisterForm1";
 import RegisterForm from "./RegisterForm";
 
-export default function RegisterPage() {
+const ADD_NEW_USER = gql`
+  mutation createNewUser(
+    $username: String!
+    $email: String!
+    $password: String!
+    $confirmPassword: String!
+    $firstName: String
+    $lastName: String
+  ) {
+    createNewUser(
+      newUser: {
+        username: $username
+        email: $email
+        password: $password
+        confirmPassword: $confirmPassword
+        firstName: $firstName
+        lastName: $lastName
+      }
+    ) {
+      id
+      email
+      username
+      firstName
+      lastName
+      token
+    }
+  }
+`;
+const RegisterSchema = yup.object({
+  username: yup.string(),
+  email: yup.string(),
+  password: yup.string(),
+  confirmPassword: yup.string(),
+  firstName: yup.string(),
+  lastName: yup.string(),
+});
+
+export default function RegisterPage({ navigation }) {
+  const [addUser, { loading }] = useMutation(ADD_NEW_USER, {});
+
   return (
     <View style={{ padding: 20, backgroundColor: "white" }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -22,7 +67,121 @@ export default function RegisterPage() {
 
           <View style={{ padding: 15 }}></View>
 
-          <RegisterForm></RegisterForm>
+          <View>
+            <Formik
+              initialValues={{
+                username: " ",
+                email: " ",
+                password: " ",
+                confirmPassword: " ",
+                firstName: " ",
+                lastName: " ",
+              }}
+              validationSchema={RegisterSchema}
+              onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+                addUser({
+                  variables: {
+                    username: values.username,
+                    email: values.email,
+                    password: values.password,
+                    confirmPassword: values.confirmPassword,
+                    firstName: values.firstName,
+                    lastName: values.lastName,
+                  },
+                });
+                //navigation.navigate("Dashboard");
+              }}
+            >
+              {(props) => (
+                <View>
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Username*"
+                    onChangeText={props.handleChange("username")}
+                    value={props.values.username}
+                    onBlur={props.handleBlur("username")}
+                  ></TextInput>
+
+                  <Text style={styles.errorText}>
+                    {props.touched.username && props.errors.username}
+                  </Text>
+
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Email*"
+                    onChangeText={props.handleChange("email")}
+                    value={props.values.email}
+                    onBlur={props.handleBlur("email")}
+                  ></TextInput>
+
+                  <Text style={styles.errorText}>
+                    {props.touched.email && props.errors.email}
+                  </Text>
+
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Password*"
+                    onChangeText={props.handleChange("password")}
+                    value={props.values.password}
+                    onBlur={props.handleBlur("password")}
+                  ></TextInput>
+
+                  <Text style={styles.errorText}>
+                    {props.touched.password && props.errors.password}
+                  </Text>
+
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Confirm Password*"
+                    onChangeText={props.handleChange("confirmPassword")}
+                    value={props.values.confirmPassword}
+                    onBlur={props.handleBlur("confirmPassword")}
+                  ></TextInput>
+
+                  <Text style={styles.errorText}>
+                    {props.touched.confirmPassword &&
+                      props.errors.confirmPassword}
+                  </Text>
+
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="First Name"
+                    onChangeText={props.handleChange("firstName")}
+                    value={props.values.firstName}
+                    onBlur={props.handleBlur("firstName")}
+                  ></TextInput>
+
+                  <Text style={styles.errorText}>
+                    {props.touched.firstName && props.errors.firstName}
+                  </Text>
+
+                  <TextInput
+                    style={styles.textInput}
+                    placeholder="Last Name"
+                    onChangeText={props.handleChange("lastName")}
+                    value={props.values.lastName}
+                    onBlur={props.handleBlur("lastName")}
+                  ></TextInput>
+
+                  <Text style={styles.errorText}>
+                    {" "}
+                    {props.touched.lastName && props.errors.lastName}
+                  </Text>
+
+                  <View></View>
+
+                  <TouchableOpacity
+                    style={styles.button}
+                    onPress={props.handleSubmit}
+                  >
+                    <Text style={styles.text}>Create Account</Text>
+                  </TouchableOpacity>
+                </View>
+              )}
+            </Formik>
+          </View>
 
           <View style={{ padding: 50 }}></View>
         </View>
@@ -42,6 +201,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     textAlign: "center",
+    fontWeight: "bold",
+    color: "white",
   },
 
   button: {

@@ -178,7 +178,8 @@ function AppNavigator() {
         <Stack.Screen
           name="Dashboard"
           component={Dashboard}
-          options={{ headerLeft: null, title: " " }}
+          //headerLeft: null,
+          options={{ title: " ", headerLeft: null }}
         ></Stack.Screen>
         <Stack.Screen name="Parking Map" component={ParkingMap}></Stack.Screen>
         <Stack.Screen

@@ -5,18 +5,21 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  ViewBase,
+  TouchableOpacityBase,
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
 //import ADD_NEW_USER from "../GraphQL/mutations";
 import { useMutation, gql } from "@apollo/client";
 import { useState } from "react/cjs/react.development";
+import { NavigationContainer } from "@react-navigation/native";
 
 const RegisterSchema = yup.object({
-  username: yup.string().required().min(8),
-  email: yup.string().required(),
-  password: yup.string().required().min(8),
-  confirmPassword: yup.string().required().min(8),
+  username: yup.string(),
+  email: yup.string(),
+  password: yup.string(),
+  confirmPassword: yup.string(),
   firstName: yup.string(),
   lastName: yup.string(),
 });
@@ -52,16 +55,8 @@ const ADD_NEW_USER = gql`
   }
 `;
 
-export default function RegisterForm() {
-  const [addUser, { loading }] = useMutation(ADD_NEW_USER, {
-    update(_, result) {
-      console.log("Registered User");
-    },
-    onError(err) {
-      setErrors(err.graphQLErrors[0].extensions.exception.errors);
-    },
-  });
-
+export default function RegisterForm(navigation) {
+  const [addUser, { loading }] = useMutation(ADD_NEW_USER);
   return (
     <View>
       <Formik
@@ -74,10 +69,10 @@ export default function RegisterForm() {
           lastName: " ",
         }}
         validationSchema={RegisterSchema}
-        //onSubmit={onSubmit}
         onSubmit={(values, actions) => {
           console.log(values);
           actions.resetForm();
+          navigation.navigate("Parking Map");
           addUser({
             variables: {
               username: values.username,
@@ -179,6 +174,7 @@ export default function RegisterForm() {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   button: {
     marginTop: 10,
@@ -202,6 +198,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
+    color: "white",
   },
 
   errorText: {

@@ -14,7 +14,7 @@ const HomePageSchema = yup.object({
   password: yup.string().required(),
 });
 
-export default function HomePageForm(navigation) {
+export default function HomePageForm({ navigation }) {
   return (
     <View>
       <Formik
