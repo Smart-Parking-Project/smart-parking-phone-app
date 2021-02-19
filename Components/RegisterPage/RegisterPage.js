@@ -55,7 +55,20 @@ const RegisterSchema = yup.object({
 });
 
 export default function RegisterPage({ navigation }) {
-  const [addUser, { loading }] = useMutation(ADD_NEW_USER, {});
+  const [addUser, { data, loading, error }] = useMutation(ADD_NEW_USER);
+  // , {
+  //   update(_) {
+  //     navigation.navigate("Dashboard");
+  //   },
+  // }
+
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error, {error.message}</Text>;
+  if (data) {
+    console.log(data);
+    navigation.navigate("Dashboard");
+    //return <Text>user is created</Text>;
+  }
 
   return (
     <View style={{ padding: 20, backgroundColor: "white" }}>
@@ -80,7 +93,6 @@ export default function RegisterPage({ navigation }) {
               validationSchema={RegisterSchema}
               onSubmit={(values, actions) => {
                 console.log(values);
-                actions.resetForm();
                 addUser({
                   variables: {
                     username: values.username,
@@ -91,6 +103,7 @@ export default function RegisterPage({ navigation }) {
                     lastName: values.lastName,
                   },
                 });
+                actions.resetForm();
                 //navigation.navigate("Dashboard");
               }}
             >
