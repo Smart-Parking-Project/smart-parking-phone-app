@@ -13,9 +13,11 @@ import {
 import { Formik } from "formik";
 import * as yup from "yup";
 import { useMutation, gql } from "@apollo/client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import RegisterForm1 from "./RegisterForm1";
 import RegisterForm from "./RegisterForm";
+import { useEffect } from "react";
 
 const ADD_NEW_USER = gql`
   mutation createNewUser(
@@ -56,18 +58,22 @@ const RegisterSchema = yup.object({
 
 export default function RegisterPage({ navigation }) {
   const [addUser, { data, loading, error }] = useMutation(ADD_NEW_USER);
-  // , {
-  //   update(_) {
-  //     navigation.navigate("Dashboard");
-  //   },
-  // }
 
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error, {error.message}</Text>;
-  if (data) {
-    console.log(data);
+  const logIn = async (data) => {
+    try {
+      await AsyncStorage.setItem("token", data.token);
+    } catch (e) {
+      // remove error
+    }
     navigation.navigate("Dashboard");
-    //return <Text>user is created</Text>;
+  };
+
+  if (data) {
+    logIn({ data });
+  }
+
+  if (error) {
+    return <Text>Error: {error.message}</Text>;
   }
 
   return (

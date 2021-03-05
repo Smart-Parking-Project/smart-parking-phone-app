@@ -1,6 +1,8 @@
-import * as React from "react";
+//import * as React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -14,6 +16,8 @@ import {
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { useMutation, gql } from "@apollo/client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import {
   TouchableOpacity,
@@ -28,11 +32,40 @@ import Payment from "../Dashboard/Payment";
 import AccountInfo from "../Dashboard/AccountInfo";
 
 const HomePageSchema = yup.object({
-  email: yup.string().required(),
+  username: yup.string().required(),
   password: yup.string().required(),
 });
 
+const AUTHENTICATE_USER = gql`
+  mutation authenticateUser($username: String!, $password: String!) {
+    authenticateUser(username: $username, password: $password) {
+      id
+      username
+      email
+      firstName
+      lastName
+      token
+    }
+  }
+`;
+
 function HomePage({ navigation }) {
+  const [logInUser, { data, loading, error }] = useMutation(AUTHENTICATE_USER);
+
+  useEffect(() => {
+    // if (error) {
+    //   navigation.navigate("Error", { error });
+    // }
+    if (data) {
+      console.log(data);
+      navigation.navigate("Dashboard");
+    }
+  });
+
+  if (error) {
+    return <Text>Error: {error.message}</Text>;
+  }
+
   return (
     <ImageBackground source={require("../../assets/2.png")} style={styles.main}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -45,13 +78,19 @@ function HomePage({ navigation }) {
         <View>
           <Formik
             initialValues={{
-              email: " ",
+              username: " ",
               password: " ",
             }}
             validationSchema={HomePageSchema}
             onSubmit={(values, actions) => {
               console.log(values);
-              navigation.navigate("Dashboard");
+              logInUser({
+                variables: {
+                  username: values.username,
+                  password: values.password,
+                },
+              });
+
               actions.resetForm();
             }}
           >
@@ -59,15 +98,15 @@ function HomePage({ navigation }) {
               <View>
                 <TextInput
                   style={styles.textInput}
-                  placeholder="Email"
+                  placeholder="Username"
                   placeholderTextColor="white"
-                  onChangeText={props.handleChange("email")}
-                  value={props.values.email}
-                  onBlur={props.handleBlur("email")}
+                  onChangeText={props.handleChange("username")}
+                  value={props.values.username}
+                  onBlur={props.handleBlur("username")}
                 ></TextInput>
 
                 <Text style={styles.errorText}>
-                  {props.touched.email && props.errors.email}
+                  {props.touched.username && props.errors.username}
                 </Text>
 
                 <TextInput

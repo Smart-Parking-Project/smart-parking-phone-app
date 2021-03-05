@@ -9,6 +9,15 @@ import {
 } from "react-native";
 
 export default function Dashboard({ navigation }) {
+  const removeToken = async () => {
+    try {
+      await AsyncStorage.removeItem("token");
+    } catch (e) {
+      // remove error
+    }
+    navigation.navigate("Home");
+  };
+
   return (
     <View style={{ padding: 20 }}>
       <View>
@@ -53,6 +62,15 @@ export default function Dashboard({ navigation }) {
           <Text style={styles.text}>Enter</Text>
         </TouchableOpacity>
       </View>
+
+      <View style={{ padding: 10 }}></View>
+
+      <View>
+        <TouchableOpacity style={styles.button} onPress={removeToken}>
+          <Text style={styles.text}>Log Out</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{ padding: 10 }}></View>
     </View>
   );
 }
