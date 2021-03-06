@@ -2,6 +2,17 @@ import React from "react";
 import AppNavigator from "./Components/HomePage/HomePage";
 import { AppRegistry, View, Text } from "react-native";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import RegisterPage from "./Components/RegisterPage/RegisterPage";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import ParkingMap from "./Components/Dashboard/ParkingMap";
+import Payment from "./Components/Dashboard/Payment";
+import AccountInfo from "./Components/Dashboard/AccountInfo";
+import HomePage from "./Components/HomePage/HomePage";
+import LogIn from "./Components/HomePage/LogIn";
+import SignIn from "./Components/HomePage/SignIn";
+import SignUp from "./Components/RegisterPage/SignUp";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -9,10 +20,49 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const Stack = createStackNavigator();
+
 export default function App() {
   return (
     <ApolloProvider client={client}>
-      <AppNavigator></AppNavigator>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={HomePage}
+            options={{ headerShown: false }}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="LogIn"
+            component={SignIn}
+            options={{ headerShown: false }}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Register"
+            component={SignUp}
+            options={{ headerShown: false }}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Dashboard"
+            component={Dashboard}
+            //headerLeft: null,
+            options={{ title: " ", headerLeft: null }}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Parking Map"
+            component={ParkingMap}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Payment"
+            component={Payment}
+            //options={{ title: "" }}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="AccountInfo"
+            component={AccountInfo}
+          ></Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
     </ApolloProvider>
   );
 }
