@@ -68,7 +68,7 @@ export default function RegisterPage({ navigation }) {
     } catch (e) {
       // remove error
     }
-    navigation.navigate("Dashboard");
+    navigation.navigate("DashboardHome");
   };
 
   if (data) {

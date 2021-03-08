@@ -47,7 +47,7 @@ export default function SignIn({ navigation }) {
     // }
     if (data) {
       console.log(data);
-      navigation.navigate("Dashboard");
+      navigation.navigate("DashboardHome");
     }
   });
 
