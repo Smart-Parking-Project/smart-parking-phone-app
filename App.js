@@ -13,6 +13,8 @@ import HomePage from "./Components/HomePage/HomePage";
 import LogIn from "./Components/HomePage/LogIn";
 import SignIn from "./Components/HomePage/SignIn";
 import SignUp from "./Components/RegisterPage/SignUp";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import TabNavigator from "./Components/Dashboard/TabNavigator";
 
 // Initialize Apollo Client
 const client = new ApolloClient({
@@ -43,20 +45,22 @@ export default function App() {
             options={{ headerShown: false }}
           ></Stack.Screen>
           <Stack.Screen
-            name="Dashboard"
-            component={Dashboard}
-            //headerLeft: null,
-            options={{ title: " ", headerLeft: null }}
+            name="DashboardHome"
+            component={TabNavigator}
+            options={{
+              // headerLeft: null,
+              // headerTitle: null,
+              // headerStyle: { backgroundColor: "#0066CC" },
+              headerShown: false,
+            }}
           ></Stack.Screen>
+          <Stack.Screen name="Dashboard" component={Dashboard}></Stack.Screen>
           <Stack.Screen
             name="Parking Map"
             component={ParkingMap}
+            options={{ headerStyle: { backgroundColor: "black" } }}
           ></Stack.Screen>
-          <Stack.Screen
-            name="Payment"
-            component={Payment}
-            //options={{ title: "" }}
-          ></Stack.Screen>
+          <Stack.Screen name="Payment" component={Payment}></Stack.Screen>
           <Stack.Screen
             name="AccountInfo"
             component={AccountInfo}

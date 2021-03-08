@@ -85,7 +85,7 @@ export default function RegisterPage({ navigation }) {
       </View>
 
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <View style={styles.footer}>
+        <View style={styles.insideFooter}>
           <View>
             <Formik
               initialValues={{
@@ -132,7 +132,7 @@ export default function RegisterPage({ navigation }) {
                     </View>
                   </View>
 
-                  <View style={{ padding: 1 }}></View>
+                  <View style={{ padding: 3 }}></View>
 
                   <View>
                     <Text style={styles.text_footer}>Email</Text>
@@ -149,7 +149,7 @@ export default function RegisterPage({ navigation }) {
                     </View>
                   </View>
 
-                  <View style={{ padding: 1 }}></View>
+                  <View style={{ padding: 3 }}></View>
 
                   <View>
                     <Text style={styles.text_footer}>Password</Text>
@@ -168,7 +168,7 @@ export default function RegisterPage({ navigation }) {
                     </View>
                   </View>
 
-                  <View style={{ padding: 1 }}></View>
+                  <View style={{ padding: 3 }}></View>
 
                   <View>
                     <Text style={styles.text_footer}>Confirm Password</Text>
@@ -185,7 +185,7 @@ export default function RegisterPage({ navigation }) {
                     </View>
                   </View>
 
-                  <View style={{ padding: 1 }}></View>
+                  <View style={{ padding: 3 }}></View>
 
                   <View>
                     <Text style={styles.text_footer}>First Name</Text>
@@ -201,7 +201,7 @@ export default function RegisterPage({ navigation }) {
                     </View>
                   </View>
 
-                  <View style={{ padding: 1 }}></View>
+                  <View style={{ padding: 3 }}></View>
 
                   <View>
                     <Text style={styles.text_footer}>Last Name</Text>
@@ -217,7 +217,7 @@ export default function RegisterPage({ navigation }) {
                     </View>
                   </View>
 
-                  <View style={{ padding: 0.5 }}></View>
+                  <View style={{ padding: 1 }}></View>
 
                   <View>
                     <TouchableOpacity
@@ -228,7 +228,7 @@ export default function RegisterPage({ navigation }) {
                     </TouchableOpacity>
                   </View>
 
-                  <View style={{ padding: 1 }}></View>
+                  <View style={{ padding: 3 }}></View>
                   <View>
                     <TouchableOpacity
                       style={styles.buttonSignUp}
@@ -250,7 +250,7 @@ export default function RegisterPage({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#009387",
+    backgroundColor: "#0066CC",
   },
   header: {
     flex: 1,
@@ -326,7 +326,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     marginLeft: 5,
     marginRight: 5,
-    backgroundColor: "#009387",
+    backgroundColor: "#0066CC",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "white",
@@ -342,7 +342,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#009387",
+    borderColor: "#0066CC",
     alignContent: "center",
   },
 
@@ -350,6 +350,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
-    color: "#009387",
+    color: "#0066CC",
+  },
+
+  insideFooter: {
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    paddingTop: 1,
   },
 });

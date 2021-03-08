@@ -12,6 +12,7 @@ import {
   Image,
   ImageBackground,
   Keyboard,
+  TouchableOpacityBase,
 } from "react-native";
 
 import {
@@ -34,7 +35,15 @@ export default function HomePage({ navigation }) {
           <Image source={require("../../assets/2.png")}></Image>
         </View> */}
 
-        <View style={{ padding: 58 }}></View>
+        <View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("DashboardHome")}
+          >
+            <Text style={styles.text}>Test</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ padding: 10 }}></View>
 
         <View
           style={{

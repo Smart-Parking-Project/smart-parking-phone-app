@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import { Formik } from "formik";
 import * as yup from "yup";
+import * as Animatable from "react-native-animatable";
+import Feather from "react-native-vector-icons/Feather";
 
 const RegisterSchema = yup.object({
   name: yup.string(),
@@ -19,114 +21,134 @@ const RegisterSchema = yup.object({
 
 export default function Payment() {
   return (
-    <View style={{ padding: 10 }}>
-      <View>
-        <Text style={styles.mainTitle}>Payment</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.text_header}> Payment </Text>
       </View>
 
-      <View style={{ padding: 15 }}>
-        <Text style={styles.text}>Time: {"\n"}Total:</Text>
-      </View>
+      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+        <View style={styles.insideFooter}>
+          <View>
+            <Text style={styles.total}> Total : </Text>
+          </View>
 
-      <View>
-        <Formik
-          initialValues={{
-            name: " ",
-            cardNumber: " ",
-            expiryDateMonth: " ",
-            expiryDateYear: " ",
-            securityCode: " ",
-          }}
-          validationSchema={RegisterSchema}
-          //onSubmit={onSubmit}
-          onSubmit={(values, actions) => {
-            console.log(values);
-            actions.resetForm();
-            addUser({
-              variables: {
-                name: values.name,
-                cardNumber: values.cardNumber,
-                expiryDateMonth: values.expiryDateMonth,
-                expiryDateYear: values.expiryDateYear,
-                securityCode: values.securityCode,
-              },
-            });
-          }}
-        >
-          {(props) => (
-            <View>
-              <TextInput
-                style={styles.textInput}
-                placeholder="Name"
-                onChangeText={props.handleChange("name")}
-                //value={props.values.name}
-                onBlur={props.handleBlur("name")}
-              ></TextInput>
+          <View style={{ padding: 5 }}></View>
+          <View>
+            <Formik
+              initialValues={{
+                name: " ",
+                cardNumber: " ",
+                expiryDateMonth: " ",
+                expiryDateYear: " ",
+                securityCode: " ",
+              }}
+              validationSchema={RegisterSchema}
+              onSubmit={(values, actions) => {
+                console.log(values);
+                actions.resetForm();
+                //navigation.navigate("Dashboard");
+              }}
+            >
+              {(props) => (
+                <View>
+                  <View>
+                    <Text style={styles.text_footer}>Name</Text>
 
-              <Text style={styles.errorText}>
-                {props.touched.name && props.errors.name}
-              </Text>
+                    <View style={styles.action}>
+                      <Feather name="user" color="black" size={20} />
 
-              <TextInput
-                style={styles.textInput}
-                placeholder="Card Number"
-                onChangeText={props.handleChange("cardNumber")}
-                //value={props.values.cardNumber}
-                onBlur={props.handleBlur("cardNumber")}
-              ></TextInput>
+                      <TextInput
+                        style={styles.textInput1}
+                        placeholder="Name"
+                        placeholderTextColor="black"
+                        onChangeText={props.handleChange("name")}
+                        value={props.values.name}
+                        onBlur={props.handleBlur("name")}
+                      ></TextInput>
+                    </View>
+                  </View>
 
-              <Text style={styles.errorText}>
-                {props.touched.cardNumber && props.errors.cardNumber}
-              </Text>
+                  <View style={{ padding: 3 }}></View>
 
-              <TextInput
-                style={styles.textInput}
-                placeholder="Expiry Date (Month)"
-                onChangeText={props.handleChange("expiryDateMonth")}
-                //value={props.values.expiryDateMonth}
-                onBlur={props.handleBlur("expiryDateMonth")}
-              ></TextInput>
+                  <View>
+                    <Text style={styles.text_footer}>Card Number</Text>
 
-              <Text style={styles.errorText}>
-                {props.touched.expiryDateMonth && props.errors.expiryDateMonth}
-              </Text>
+                    <View style={styles.action}>
+                      <TextInput
+                        style={styles.textInput1}
+                        placeholder="Card Number"
+                        onChangeText={props.handleChange("cardNumber")}
+                        value={props.values.cardNumber}
+                        onBlur={props.handleBlur("cardNumber")}
+                      ></TextInput>
+                    </View>
+                  </View>
 
-              <TextInput
-                style={styles.textInput}
-                placeholder="Expiry Date (Year)"
-                onChangeText={props.handleChange("expiryDateYear")}
-                //value={props.values.expiryDateYear}
-                onBlur={props.handleBlur("expiryDateYear")}
-              ></TextInput>
+                  <View style={{ padding: 3 }}></View>
 
-              <Text style={styles.errorText}>
-                {props.touched.expiryDateYear && props.errors.expiryDateYear}
-              </Text>
+                  <View>
+                    <Text style={styles.text_footer}>Expiry Date (Month)</Text>
+                    <View style={styles.action}>
+                      <TextInput
+                        style={styles.textInput1}
+                        placeholder="Expiry Date (Month)"
+                        placeholderTextColor="black"
+                        onChangeText={props.handleChange("expiryDateMonth")}
+                        value={props.values.expiryDateMonth}
+                        onBlur={props.handleBlur("expiryDateMonth")}
+                      ></TextInput>
+                    </View>
+                  </View>
 
-              <TextInput
-                style={styles.textInput}
-                placeholder="Security Code"
-                onChangeText={props.handleChange("securityCode")}
-                //value={props.values.securityCode}
-                onBlur={props.handleBlur("securityCode")}
-              ></TextInput>
+                  <View style={{ padding: 3 }}></View>
 
-              <Text style={styles.errorText}>
-                {props.touched.securityCode && props.errors.securityCode}
-              </Text>
+                  <View>
+                    <Text style={styles.text_footer}>Expiry Date (Year)</Text>
+                    <View style={styles.action}>
+                      <TextInput
+                        style={styles.textInput1}
+                        placeholder="Expiry Date (Year)"
+                        onChangeText={props.handleChange("expiryDateYear")}
+                        value={props.values.expiryDateYear}
+                        onBlur={props.handleBlur("expiryDateYear")}
+                      ></TextInput>
+                    </View>
+                  </View>
 
-              <View></View>
+                  <View style={{ padding: 3 }}></View>
 
-              <TouchableOpacity
-                style={styles.button}
-                onPress={props.handleSubmit}
-              >
-                <Text style={styles.text}>Pay</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </Formik>
-      </View>
+                  <View>
+                    <Text style={styles.text_footer}>Security Code</Text>
+                    <View style={styles.action}>
+                      <Feather name="lock" color="black" size={20} />
+                      <TextInput
+                        style={styles.textInput1}
+                        placeholder="Security Code"
+                        onChangeText={props.handleChange("securityCode")}
+                        value={props.values.securityCode}
+                        onBlur={props.handleBlur("securityCode")}
+                        secureTextEntry={true}
+                      ></TextInput>
+                    </View>
+                  </View>
+
+                  <View style={{ padding: 3 }}></View>
+                  <View style={{ padding: 3 }}></View>
+
+                  <View>
+                    <TouchableOpacity
+                      style={styles.buttonLogin}
+                      onPress={props.handleSubmit}
+                    >
+                      <Text style={styles.text}>Pay</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )}
+            </Formik>
+          </View>
+        </View>
+      </Animatable.View>
     </View>
   );
 }
@@ -168,5 +190,98 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     color: "black",
+  },
+  container: {
+    flex: 1,
+    backgroundColor: "#0066CC",
+  },
+  header: {
+    flex: 1,
+    justifyContent: "flex-end",
+    paddingHorizontal: 20,
+    paddingBottom: 50,
+  },
+  footer: {
+    flex: 4,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+  insideFooter: {
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    paddingTop: 1,
+  },
+
+  text_header: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 30,
+  },
+  text: {
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "white",
+  },
+
+  textInput: {
+    borderColor: "black",
+    borderWidth: 1,
+    padding: 15,
+    color: "black",
+  },
+
+  text_footer: {
+    color: "black",
+    fontSize: 18,
+  },
+
+  total: {
+    color: "black",
+    fontSize: 18,
+    textAlign: "center",
+  },
+
+  action: {
+    flexDirection: "row",
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f2f2f2",
+    paddingBottom: 5,
+  },
+
+  textInput1: {
+    flex: 1,
+
+    paddingLeft: 10,
+    color: "black",
+  },
+
+  button: {
+    alignItems: "center",
+    marginTop: 50,
+  },
+
+  textSign: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  buttonLogin: {
+    marginTop: 4,
+    paddingTop: 15,
+    paddingBottom: 15,
+    marginLeft: 5,
+    marginRight: 5,
+    backgroundColor: "#0066CC",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "white",
+    alignContent: "center",
   },
 });

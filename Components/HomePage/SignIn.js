@@ -153,7 +153,7 @@ export default function SignIn({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#009387",
+    backgroundColor: "#0066CC",
   },
   header: {
     flex: 1,
@@ -212,13 +212,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 50,
   },
-  signIn: {
-    width: "100%",
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 10,
-  },
+
   textSign: {
     fontSize: 18,
     fontWeight: "bold",
@@ -229,7 +223,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     marginLeft: 5,
     marginRight: 5,
-    backgroundColor: "#009387",
+    backgroundColor: "#0066CC",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "white",
@@ -245,7 +239,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#009387",
+    borderColor: "#0066CC",
     alignContent: "center",
   },
 
@@ -253,6 +247,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
-    color: "#009387",
+    color: "#0066CC",
   },
 });
