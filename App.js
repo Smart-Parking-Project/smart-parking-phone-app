@@ -15,6 +15,9 @@ import SignIn from "./Components/HomePage/SignIn";
 import SignUp from "./Components/RegisterPage/SignUp";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import TabNavigator from "./Components/Dashboard/TabNavigator";
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Warning: ..."]);
+LogBox.ignoreAllLogs();
 
 // Initialize Apollo Client
 const client = new ApolloClient({

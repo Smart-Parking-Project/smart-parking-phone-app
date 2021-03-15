@@ -8,7 +8,17 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import moment from "moment";
+import { useState } from "react";
+import { Stopwatch, Timer } from "react-native-stopwatch-timer";
+
 export default function Dashboard({ navigation }) {
+  const [isStopwatchStart, setIsStopwatchStart] = useState(false);
+  const [resetStopwatch, setResetStopwatch] = useState(false);
+  //const [stopWatchTime, setStopWatchTime] = useState(0);
+
+  let stopWatchTime = 0;
+
   const removeToken = async () => {
     try {
       await AsyncStorage.removeItem("token");
@@ -49,8 +59,8 @@ export default function Dashboard({ navigation }) {
 
       <View style={{ padding: 50 }}></View>
       <View style={{ padding: 50 }}></View>
-      <View style={{ padding: 15 }}></View>
-      <View style={{ padding: 50 }}>
+      <View style={{ padding: 10 }}></View>
+      {/* <View style={{ padding: 50 }}>
         <Text style={{ color: "#0066CC", textAlign: "center" }}>
           Press the button below to enter the lot
         </Text>
@@ -62,24 +72,57 @@ export default function Dashboard({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
-      </View>
+      </View> */}
+
+      <Text style={styles.text4}>Press the button below to enter the lot</Text>
+
+      <View style={{ padding: 5 }}></View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => {
+          if (!isStopwatchStart) {
+            setIsStopwatchStart(!isStopwatchStart);
+            console.log(stopWatchTime);
+          } else {
+            setIsStopwatchStart(!isStopwatchStart);
+            console.log(stopWatchTime);
+          }
+          // setIsStopwatchStart(!isStopwatchStart);
+          // setResetStopwatch(false);
+        }}
+      >
+        <Text style={styles.text2}>{!isStopwatchStart ? "ENTER" : "STOP"}</Text>
+      </TouchableOpacity>
+
+      <View style={{ padding: 5 }}></View>
+
+      <Stopwatch
+        laps
+        msecs
+        start={isStopwatchStart}
+        // To start
+        reset={resetStopwatch}
+        // To reset
+        options={options}
+        getTime={(time) => {
+          stopWatchTime = time;
+        }}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 10,
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingLeft: 15,
-    paddingRight: 15,
-    marginLeft: 60,
-    marginRight: 60,
-    backgroundColor: "#003FB6",
-    borderRadius: 15,
-    borderWidth: 2,
-    borderColor: "black",
+    marginTop: 4,
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginLeft: 120,
+    marginRight: 120,
+    backgroundColor: "#0066CC",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "white",
     alignContent: "center",
   },
   text: {
@@ -94,29 +137,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "#0066CC",
   },
-  buttonLogin: {
-    marginTop: 4,
-    paddingTop: 15,
-    paddingBottom: 15,
-    marginLeft: 50,
-    marginRight: 50,
-    backgroundColor: "#0066CC",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "white",
-    alignContent: "center",
+  timer: {
+    fontSize: 30,
+    textAlign: "center",
+    color: "#0066CC",
   },
-  buttonLogout: {
-    marginTop: 15,
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginLeft: 150,
-    marginRight: 150,
-    backgroundColor: "#0066CC",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "white",
-  },
+
   text2: {
     fontSize: 22,
     textAlign: "center",
@@ -129,4 +155,38 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
   },
+
+  text4: {
+    fontSize: 15,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "#0066CC",
+  },
+
+  buttonLogout: {
+    marginTop: 15,
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginLeft: 150,
+    marginRight: 150,
+    backgroundColor: "#0066CC",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "white",
+  },
 });
+
+const options = {
+  // container: {
+  //   padding: 5,
+  //   borderRadius: 5,
+  //   width: 220,
+  //   alignContent: "center",
+  // },
+  text: {
+    fontSize: 30,
+    color: "#0066CC",
+    marginLeft: 7,
+    textAlign: "center",
+  },
+};

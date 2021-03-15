@@ -28,23 +28,21 @@ export default function HomePage({ navigation }) {
         <View>
           <Text style={styles.mainTitle}>Smart Parking </Text>
         </View>
-
         <View style={{ padding: 50 }}></View>
-
         {/* <View>
           <Image source={require("../../assets/2.png")}></Image>
         </View> */}
 
-        <View>
+        {/* <View>
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate("DashboardHome")}
           >
             <Text style={styles.text}>Test</Text>
           </TouchableOpacity>
-        </View>
-        <View style={{ padding: 10 }}></View>
+        </View> */}
 
+        <View style={{ padding: 5 }}></View>
         <View
           style={{
             flexDirection: "row",
@@ -70,7 +68,6 @@ export default function HomePage({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
-
         <View style={{ padding: 5 }}></View>
       </TouchableWithoutFeedback>
     </ImageBackground>
