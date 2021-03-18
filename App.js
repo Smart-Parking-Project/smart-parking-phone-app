@@ -16,6 +16,7 @@ import SignUp from "./Components/RegisterPage/SignUp";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import TabNavigator from "./Components/Dashboard/TabNavigator";
 import { LogBox } from "react-native";
+import Exit from "./Components/Dashboard/Exit";
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
 
@@ -63,10 +64,19 @@ export default function App() {
             component={ParkingMap}
             options={{ headerStyle: { backgroundColor: "black" } }}
           ></Stack.Screen>
-          <Stack.Screen name="Payment" component={Payment}></Stack.Screen>
           <Stack.Screen
-            name="AccountInfo"
-            component={AccountInfo}
+            name="Payment"
+            component={Payment}
+            options={{
+              headerShown: false,
+            }}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Exit"
+            component={Exit}
+            options={{
+              headerShown: false,
+            }}
           ></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

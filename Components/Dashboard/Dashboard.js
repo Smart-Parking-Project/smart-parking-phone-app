@@ -84,7 +84,7 @@ export default function Dashboard({ navigation }) {
     CREATE_PARKING_SESSION
   );
 
-  const [endParking, { data1, loading1, error1 }] = useMutation(
+  const [endParking, { data: endP, loading1, error1 }] = useMutation(
     END_PARKING_SESSION
   );
 
@@ -102,16 +102,32 @@ export default function Dashboard({ navigation }) {
     console.log("Parking Session Created");
   }
 
-  if (data1) {
+  if (endP) {
     console.log("PARKING ENDED");
-    console.log(data.endParkingSession.payAmount);
+    console.log(endP.endParkingSession.payAmount);
+    const payAmount = endP.endParkingSession.payAmount;
+    const enterDate = endP.endParkingSession.enterDate;
+    const enterTime = endP.endParkingSession.enterTime;
+    const exitDate = endP.endParkingSession.exitDate;
+    const exitTime = endP.endParkingSession.exitTime;
+    const elapsedTime = endP.endParkingSession.elapsedTime;
+
+    navigation.navigate("Payment", {
+      payAmount: payAmount,
+      enterDate: enterDate,
+      enterTime: enterTime,
+      exitDate: exitDate,
+      exitTime: exitTime,
+      elapsedTime: elapsedTime,
+    });
   }
 
-  
   const [isStopwatchStart, setIsStopwatchStart] = useState(false);
   const [resetStopwatch, setResetStopwatch] = useState(false);
+  const [start, setStart] = useState(null);
   //const [stopWatchTime, setStopWatchTime] = useState(0);
   const [elapsedParkingTime, setElapsedParkingTime] = useState(null);
+  const [time, setTime] = useState(null);
 
   let stopWatchTime = 0;
 
@@ -132,6 +148,17 @@ export default function Dashboard({ navigation }) {
     "November",
     "December",
   ];
+
+  // const saveParkingAmount = async (endP) => {
+  //   try {
+  //     await AsyncStorage.setItem("payAmount", endP.endParkingSession.payAmount);
+  //     console.log("Value Saved");
+  //   } catch (e) {
+  //     // remove error
+  //   }
+
+  //   navigation.navigate("Payment");
+  // };
 
   const removeToken = async () => {
     try {
@@ -245,34 +272,15 @@ export default function Dashboard({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-
       <View style={{ padding: 30 }}>
         <Text style={styles.mainTitle}>Welcome to Smart Parking!</Text>
       </View>
-
       {/* <View style={{ padding: 10 }}>
         <Image source={require("../../assets/1.png")}></Image>
       </View> */}
-
       <View style={{ padding: 50 }}></View>
-      <View style={{ padding: 50 }}></View>
-      <View style={{ padding: 10 }}></View>
-      {/* <View style={{ padding: 50 }}>
-        <Text style={{ color: "#0066CC", textAlign: "center" }}>
-          Press the button below to enter the lot
-        </Text>
-
-        <View style={{ padding: 5 }}>
-          <View>
-            <TouchableOpacity style={styles.buttonLogin}>
-              <Text style={styles.text2}>ENTER</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View> */}
-
+      <View style={{ padding: 30 }}></View>
       <Text style={styles.text4}>Press the button below to enter the lot</Text>
-
       <View style={{ padding: 5 }}></View>
       <TouchableOpacity
         style={styles.button}
@@ -290,6 +298,7 @@ export default function Dashboard({ navigation }) {
               date.toString() +
               ", " +
               year.toString();
+
             console.log(startDate);
 
             var hours = new Date().getHours();
@@ -299,6 +308,9 @@ export default function Dashboard({ navigation }) {
             var startTime =
               hours.toString() + ":" + min.toString() + ":" + sec.toString();
             console.log(startTime);
+
+            setStart(startDate);
+            setTime(startTime);
 
             getUserID();
 
@@ -340,9 +352,7 @@ export default function Dashboard({ navigation }) {
       >
         <Text style={styles.text2}>{!isStopwatchStart ? "ENTER" : "STOP"}</Text>
       </TouchableOpacity>
-
       <View style={{ padding: 5 }}></View>
-
       <Stopwatch
         laps
         msecs
@@ -355,6 +365,12 @@ export default function Dashboard({ navigation }) {
           stopWatchTime = time;
         }}
       />
+
+      <View style={{ padding: 5 }}></View>
+      <Text style={styles.text5}> {start}</Text>
+
+      <View style={{ padding: 2 }}></View>
+      <Text style={styles.text5}> {time}</Text>
     </View>
   );
 }
@@ -410,6 +426,17 @@ const styles = StyleSheet.create({
     color: "#0066CC",
   },
 
+  text5: {
+    fontSize: 20,
+    textAlign: "center",
+    color: "#0066CC",
+  },
+  enterText: {
+    fontSize: 30,
+    color: "#0066CC",
+    textAlign: "center",
+  },
+
   buttonLogout: {
     marginTop: 15,
     paddingTop: 10,
@@ -424,12 +451,14 @@ const styles = StyleSheet.create({
 });
 
 const options = {
-  // container: {
-  //   padding: 5,
-  //   borderRadius: 5,
-  //   width: 220,
-  //   alignContent: "center",
-  // },
+  container: {
+    alignContent: "center",
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "#0066CC",
+    marginLeft: 86,
+    marginRight: 86,
+  },
   text: {
     fontSize: 30,
     color: "#0066CC",

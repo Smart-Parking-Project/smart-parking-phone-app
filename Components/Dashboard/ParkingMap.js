@@ -98,7 +98,7 @@ export default function ParkingMap() {
                 style={{
                   width: 70,
                   height: 130,
-                  backgroundColor: "red",
+                  backgroundColor: "white",
                   justifyContent: "center",
                   borderWidth: 1,
                   marginRight: 50,

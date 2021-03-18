@@ -4,6 +4,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Dashboard from "./Dashboard";
 import ParkingMap from "./ParkingMap";
 import Payment from "./Payment";
+import Help from "./Help";
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -35,13 +36,13 @@ export default function MyTabs() {
         }}
       />
       <Tab.Screen
-        name="Payment"
-        component={Payment}
+        name="Info"
+        component={Help}
         options={{
-          tabBarLabel: "Payment",
+          tabBarLabel: "Info",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons
-              name="currency-usd-circle-outline"
+              name="mdi-information-outline"
               color={color}
               size={26}
             />

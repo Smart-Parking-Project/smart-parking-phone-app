@@ -19,7 +19,16 @@ const RegisterSchema = yup.object({
   securityCode: yup.string(),
 });
 
-export default function Payment() {
+export default function Payment({ route, navigation }) {
+  const {
+    payAmount,
+    enterDate,
+    enterTime,
+    exitDate,
+    exitTime,
+    elapsedTime,
+  } = route.params;
+  //console.log({ amount });
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -29,7 +38,7 @@ export default function Payment() {
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
         <View style={styles.insideFooter}>
           <View>
-            <Text style={styles.total}> Total : </Text>
+            <Text style={styles.total}> Total: {payAmount}</Text>
           </View>
 
           <View style={{ padding: 5 }}></View>
@@ -46,7 +55,14 @@ export default function Payment() {
               onSubmit={(values, actions) => {
                 console.log(values);
                 actions.resetForm();
-                //navigation.navigate("Dashboard");
+                navigation.navigate("Exit", {
+                  payAmount: payAmount,
+                  enterDate: enterDate,
+                  enterTime: enterTime,
+                  exitDate: exitDate,
+                  exitTime: exitTime,
+                  elapsedTime: elapsedTime,
+                });
               }}
             >
               {(props) => (
@@ -244,8 +260,9 @@ const styles = StyleSheet.create({
 
   total: {
     color: "black",
-    fontSize: 18,
+    fontSize: 20,
     textAlign: "center",
+    fontWeight: "bold",
   },
 
   action: {
