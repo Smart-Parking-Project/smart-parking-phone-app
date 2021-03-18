@@ -89,7 +89,7 @@ export default function ParkingMap() {
                   backgroundColor: p3Color,
                   justifyContent: "center",
                   borderWidth: 1,
-                  // marginLeft: 50,
+                  marginLeft: 50,
                 }}
               >
                 <Text style={styles.text}>P3</Text>
@@ -98,15 +98,16 @@ export default function ParkingMap() {
                 style={{
                   width: 70,
                   height: 130,
-                  backgroundColor: "#0066CC",
+                  backgroundColor: "red",
                   justifyContent: "center",
                   borderWidth: 1,
+                  marginRight: 50,
                 }}
               >
                 <Text style={styles.text}>P4</Text>
               </View>
 
-              <View
+              {/* <View
                 style={{
                   width: 70,
                   height: 130,
@@ -117,7 +118,7 @@ export default function ParkingMap() {
                 }}
               >
                 <Text style={styles.text}>P5</Text>
-              </View>
+              </View> */}
             </View>
           </View>
 

@@ -41,15 +41,29 @@ const AUTHENTICATE_USER = gql`
 export default function SignIn({ navigation }) {
   const [logInUser, { data, loading, error }] = useMutation(AUTHENTICATE_USER);
 
-  useEffect(() => {
-    // if (error) {
-    //   navigation.navigate("Error", { error });
-    // }
-    if (data) {
-      console.log(data);
-      navigation.navigate("DashboardHome");
+  const logIn = async (data) => {
+    try {
+      await AsyncStorage.setItem("token", data.authenticateUser.token);
+      console.log("Data Saved");
+    } catch (e) {
+      // remove error
+      console.log("Didn't save");
     }
-  });
+
+    try {
+      await AsyncStorage.setItem("id", data.authenticateUser.id);
+    } catch (e) {
+      // remove error
+    }
+
+    const userIDAdded = data.authenticateUser.id;
+
+    navigation.navigate("DashboardHome");
+  };
+
+  if (data) {
+    logIn(data);
+  }
 
   if (error) {
     return <Text>Error: {error.message}</Text>;

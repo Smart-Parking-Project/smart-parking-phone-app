@@ -33,14 +33,14 @@ export default function HomePage({ navigation }) {
           <Image source={require("../../assets/2.png")}></Image>
         </View> */}
 
-        {/* <View>
+        <View>
           <TouchableOpacity
             style={styles.button}
             onPress={() => navigation.navigate("DashboardHome")}
           >
             <Text style={styles.text}>Test</Text>
           </TouchableOpacity>
-        </View> */}
+        </View>
 
         <View style={{ padding: 5 }}></View>
         <View

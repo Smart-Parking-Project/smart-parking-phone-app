@@ -64,17 +64,23 @@ export default function RegisterPage({ navigation }) {
 
   const logIn = async (data) => {
     try {
-      await AsyncStorage.setItem("token", data.token);
+      await AsyncStorage.setItem("token", data.authenticateUser.token);
     } catch (e) {
       // remove error
     }
+
+    try {
+      await AsyncStorage.setItem("id", data.authenticateUser.id);
+    } catch (e) {
+      // remove error
+    }
+
     navigation.navigate("DashboardHome");
   };
 
   if (data) {
-    logIn({ data });
+    logIn(data);
   }
-
   if (error) {
     return <Text>Error: {error.message}</Text>;
   }
