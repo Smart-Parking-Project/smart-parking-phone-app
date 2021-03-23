@@ -21,6 +21,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import RegisterForm1 from "./RegisterForm1";
 import RegisterForm from "./RegisterForm";
 import { useEffect } from "react";
+import { ScrollView } from "react-native-gesture-handler";
 
 const ADD_NEW_USER = gql`
   mutation createNewUser(
@@ -82,8 +83,10 @@ export default function RegisterPage({ navigation }) {
     logIn(data);
   }
   if (error) {
-    return <Text>Error: {error.message}</Text>;
+    navigation.navigate("Error", { error: error.message });
+    //return <Text>Error: {error.message}</Text>;
   }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -91,163 +94,165 @@ export default function RegisterPage({ navigation }) {
       </View>
 
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <View style={styles.insideFooter}>
-          <View>
-            <Formik
-              initialValues={{
-                username: " ",
-                email: " ",
-                password: " ",
-                confirmPassword: " ",
-                firstName: " ",
-                lastName: " ",
-              }}
-              validationSchema={RegisterSchema}
-              onSubmit={(values, actions) => {
-                console.log(values);
-                addUser({
-                  variables: {
-                    username: values.username,
-                    email: values.email,
-                    password: values.password,
-                    confirmPassword: values.confirmPassword,
-                    firstName: values.firstName,
-                    lastName: values.lastName,
-                  },
-                });
-                actions.resetForm();
-                //navigation.navigate("Dashboard");
-              }}
-            >
-              {(props) => (
-                <View>
+        <ScrollView>
+          <View style={styles.insideFooter}>
+            <View>
+              <Formik
+                initialValues={{
+                  username: " ",
+                  email: " ",
+                  password: " ",
+                  confirmPassword: " ",
+                  firstName: " ",
+                  lastName: " ",
+                }}
+                validationSchema={RegisterSchema}
+                onSubmit={(values, actions) => {
+                  console.log(values);
+                  addUser({
+                    variables: {
+                      username: values.username,
+                      email: values.email,
+                      password: values.password,
+                      confirmPassword: values.confirmPassword,
+                      firstName: values.firstName,
+                      lastName: values.lastName,
+                    },
+                  });
+                  actions.resetForm();
+                  //navigation.navigate("Dashboard");
+                }}
+              >
+                {(props) => (
                   <View>
-                    <Text style={styles.text_footer}>Username</Text>
+                    <View>
+                      <Text style={styles.text_footer}>Username</Text>
 
-                    <View style={styles.action}>
-                      <Feather name="user" color="black" size={20} />
+                      <View style={styles.action}>
+                        <Feather name="user" color="black" size={20} />
 
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="Username"
-                        placeholderTextColor="black"
-                        onChangeText={props.handleChange("username")}
-                        value={props.values.username}
-                        onBlur={props.handleBlur("username")}
-                      ></TextInput>
+                        <TextInput
+                          style={styles.textInput1}
+                          placeholder="Username"
+                          placeholderTextColor="black"
+                          onChangeText={props.handleChange("username")}
+                          value={props.values.username}
+                          onBlur={props.handleBlur("username")}
+                        ></TextInput>
+                      </View>
+                    </View>
+
+                    <View style={{ padding: 1 }}></View>
+
+                    <View>
+                      <Text style={styles.text_footer}>Email</Text>
+
+                      <View style={styles.action}>
+                        <Feather name="mail" color="black" size={20} />
+                        <TextInput
+                          style={styles.textInput1}
+                          placeholder="Email*"
+                          onChangeText={props.handleChange("email")}
+                          value={props.values.email}
+                          onBlur={props.handleBlur("email")}
+                        ></TextInput>
+                      </View>
+                    </View>
+
+                    <View style={{ padding: 3 }}></View>
+
+                    <View>
+                      <Text style={styles.text_footer}>Password</Text>
+                      <View style={styles.action}>
+                        <Feather name="lock" color="black" size={20} />
+
+                        <TextInput
+                          style={styles.textInput1}
+                          placeholder="Password"
+                          placeholderTextColor="black"
+                          secureTextEntry={true}
+                          onChangeText={props.handleChange("password")}
+                          value={props.values.password}
+                          onBlur={props.handleBlur("password")}
+                        ></TextInput>
+                      </View>
+                    </View>
+
+                    <View style={{ padding: 3 }}></View>
+
+                    <View>
+                      <Text style={styles.text_footer}>Confirm Password</Text>
+                      <View style={styles.action}>
+                        <Feather name="lock" color="black" size={20} />
+                        <TextInput
+                          style={styles.textInput1}
+                          placeholder="Confirm Password*"
+                          secureTextEntry={true}
+                          onChangeText={props.handleChange("confirmPassword")}
+                          value={props.values.confirmPassword}
+                          onBlur={props.handleBlur("confirmPassword")}
+                        ></TextInput>
+                      </View>
+                    </View>
+
+                    <View style={{ padding: 3 }}></View>
+
+                    <View>
+                      <Text style={styles.text_footer}>First Name</Text>
+                      <View style={styles.action}>
+                        <Feather name="user" color="black" size={20} />
+                        <TextInput
+                          style={styles.textInput1}
+                          placeholder="First Name"
+                          onChangeText={props.handleChange("firstName")}
+                          value={props.values.firstName}
+                          onBlur={props.handleBlur("firstName")}
+                        ></TextInput>
+                      </View>
+                    </View>
+
+                    <View style={{ padding: 3 }}></View>
+
+                    <View>
+                      <Text style={styles.text_footer}>Last Name</Text>
+                      <View style={styles.action}>
+                        <Feather name="user" color="black" size={20} />
+                        <TextInput
+                          style={styles.textInput1}
+                          placeholder="Last Name"
+                          onChangeText={props.handleChange("lastName")}
+                          value={props.values.lastName}
+                          onBlur={props.handleBlur("lastName")}
+                        ></TextInput>
+                      </View>
+                    </View>
+
+                    <View style={{ padding: 1 }}></View>
+
+                    <View>
+                      <TouchableOpacity
+                        style={styles.buttonLogin}
+                        onPress={props.handleSubmit}
+                      >
+                        <Text style={styles.text}>Sign Up</Text>
+                      </TouchableOpacity>
+                    </View>
+
+                    <View style={{ padding: 3 }}></View>
+                    <View>
+                      <TouchableOpacity
+                        style={styles.buttonSignUp}
+                        onPress={() => navigation.navigate("LogIn")}
+                      >
+                        <Text style={styles.textSign}>Sign In</Text>
+                      </TouchableOpacity>
                     </View>
                   </View>
-
-                  <View style={{ padding: 3 }}></View>
-
-                  <View>
-                    <Text style={styles.text_footer}>Email</Text>
-
-                    <View style={styles.action}>
-                      <Feather name="mail" color="black" size={20} />
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="Email*"
-                        onChangeText={props.handleChange("email")}
-                        value={props.values.email}
-                        onBlur={props.handleBlur("email")}
-                      ></TextInput>
-                    </View>
-                  </View>
-
-                  <View style={{ padding: 3 }}></View>
-
-                  <View>
-                    <Text style={styles.text_footer}>Password</Text>
-                    <View style={styles.action}>
-                      <Feather name="lock" color="black" size={20} />
-
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="Password"
-                        placeholderTextColor="black"
-                        secureTextEntry={true}
-                        onChangeText={props.handleChange("password")}
-                        value={props.values.password}
-                        onBlur={props.handleBlur("password")}
-                      ></TextInput>
-                    </View>
-                  </View>
-
-                  <View style={{ padding: 3 }}></View>
-
-                  <View>
-                    <Text style={styles.text_footer}>Confirm Password</Text>
-                    <View style={styles.action}>
-                      <Feather name="lock" color="black" size={20} />
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="Confirm Password*"
-                        secureTextEntry={true}
-                        onChangeText={props.handleChange("confirmPassword")}
-                        value={props.values.confirmPassword}
-                        onBlur={props.handleBlur("confirmPassword")}
-                      ></TextInput>
-                    </View>
-                  </View>
-
-                  <View style={{ padding: 3 }}></View>
-
-                  <View>
-                    <Text style={styles.text_footer}>First Name</Text>
-                    <View style={styles.action}>
-                      <Feather name="user" color="black" size={20} />
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="First Name"
-                        onChangeText={props.handleChange("firstName")}
-                        value={props.values.firstName}
-                        onBlur={props.handleBlur("firstName")}
-                      ></TextInput>
-                    </View>
-                  </View>
-
-                  <View style={{ padding: 3 }}></View>
-
-                  <View>
-                    <Text style={styles.text_footer}>Last Name</Text>
-                    <View style={styles.action}>
-                      <Feather name="user" color="black" size={20} />
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="Last Name"
-                        onChangeText={props.handleChange("lastName")}
-                        value={props.values.lastName}
-                        onBlur={props.handleBlur("lastName")}
-                      ></TextInput>
-                    </View>
-                  </View>
-
-                  <View style={{ padding: 1 }}></View>
-
-                  <View>
-                    <TouchableOpacity
-                      style={styles.buttonLogin}
-                      onPress={props.handleSubmit}
-                    >
-                      <Text style={styles.text}>Sign Up</Text>
-                    </TouchableOpacity>
-                  </View>
-
-                  <View style={{ padding: 3 }}></View>
-                  <View>
-                    <TouchableOpacity
-                      style={styles.buttonSignUp}
-                      onPress={() => navigation.navigate("LogIn")}
-                    >
-                      <Text style={styles.textSign}>Sign In</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              )}
-            </Formik>
+                )}
+              </Formik>
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </Animatable.View>
     </View>
   );
@@ -265,7 +270,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   footer: {
-    flex: 6,
+    flex: 8,
     backgroundColor: "#fff",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,

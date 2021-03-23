@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import * as Animatable from "react-native-animatable";
 
 export default function Exit({ navigation, route }) {
   const {
@@ -17,61 +18,55 @@ export default function Exit({ navigation, route }) {
     elapsedTime,
   } = route.params;
   return (
-    <View>
-      <View
-        style={{
-          width: 375,
-          height: 65,
-          backgroundColor: "#0066CC",
-        }}
-      ></View>
-
-      <View style={{ padding: 30 }}>
-        <Text style={styles.mainTitle}>Thank you for using Smart Parking!</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.text_header}> Summary </Text>
       </View>
 
-      <View style={{ padding: 5 }}>
-        <Text style={styles.summaryText}> Parking Summary:</Text>
-      </View>
+      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+        <View style={styles.insideFooter}>
+          <View style={{ padding: 8 }}>
+            <Text style={styles.mainTitle}>
+              Thank you for using Smart Parking!
+            </Text>
+          </View>
+          <View style={{ padding: 35 }}>
+            <Text style={styles.summaryText}> Parking Summary:</Text>
 
-      <View style={{ padding: 3 }}>
-        <Text style={styles.summaryInfo}> Enter Date: {enterDate}</Text>
-      </View>
-      <View style={{ padding: 3 }}>
-        <Text style={styles.summaryInfo}> Enter Time: {enterTime}</Text>
-      </View>
-      <View style={{ padding: 3 }}>
-        <Text style={styles.summaryInfo}> Exit Date: {exitDate}</Text>
-      </View>
-      <View style={{ padding: 3 }}>
-        <Text style={styles.summaryInfo}> Exit Time: {exitTime}</Text>
-      </View>
-      <View style={{ padding: 3 }}>
-        <Text style={styles.summaryInfo}> Total Time: {elapsedTime}</Text>
-      </View>
-      <View style={{ padding: 3 }}>
-        <Text style={styles.summaryInfo}> Amount Paid: {payAmount}</Text>
-      </View>
+            <View style={{ padding: 5 }}>
+              <Text style={styles.summaryInfo}> Enter Date: {enterDate}</Text>
+            </View>
+            <View style={{ padding: 3 }}>
+              <Text style={styles.summaryInfo}> Exit Date: {exitDate}</Text>
+            </View>
+            <View style={{ padding: 3 }}>
+              <Text style={styles.summaryInfo}> Enter Time: {enterTime}</Text>
+            </View>
 
-      <View style={{ padding: 30 }}></View>
-      <Text style={styles.text4}>Press the button below to exit the lot</Text>
-      <View style={{ padding: 5 }}></View>
+            <View style={{ padding: 3 }}>
+              <Text style={styles.summaryInfo}> Exit Time: {exitTime}</Text>
+            </View>
+            <View style={{ padding: 3 }}>
+              <Text style={styles.summaryInfo}> Total Time: {elapsedTime}</Text>
+            </View>
+            <View style={{ padding: 3 }}>
+              <Text style={styles.summaryInfo}> Amount Paid: {payAmount}</Text>
+            </View>
+          </View>
 
-      <TouchableOpacity
-        style={styles.button1}
-        onPress={() => navigation.navigate("Home")}
-      >
-        <Text style={styles.text2}>Exit</Text>
-      </TouchableOpacity>
-
-      <View style={{ padding: 20 }}></View>
-      <View
-        style={{
-          width: 375,
-          height: 65,
-          backgroundColor: "#0066CC",
-        }}
-      ></View>
+          <View style={{ padding: 15 }}></View>
+          <Text style={styles.text4}>
+            Press the button below to exit the lot
+          </Text>
+          <View style={{ padding: 5 }}></View>
+          <TouchableOpacity
+            style={styles.button1}
+            onPress={() => navigation.navigate("Home")}
+          >
+            <Text style={styles.text2}>Exit</Text>
+          </TouchableOpacity>
+        </View>
+      </Animatable.View>
     </View>
   );
 }
@@ -81,8 +76,8 @@ const styles = StyleSheet.create({
     marginTop: 4,
     paddingTop: 10,
     paddingBottom: 10,
-    marginLeft: 120,
-    marginRight: 120,
+    marginLeft: 80,
+    marginRight: 80,
     backgroundColor: "#0066CC",
     borderRadius: 10,
     borderWidth: 1,
@@ -91,13 +86,13 @@ const styles = StyleSheet.create({
   },
 
   summaryText: {
-    fontSize: 25,
+    fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
     color: "#0066CC",
   },
   summaryInfo: {
-    fontSize: 20,
+    fontSize: 17,
     textAlign: "center",
     color: "#0066CC",
   },
@@ -120,7 +115,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   mainTitle: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
     textAlign: "center",
     color: "#0066CC",
@@ -130,7 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#0066CC",
   },
   text4: {
-    fontSize: 20,
+    fontSize: 15,
     textAlign: "center",
     fontWeight: "bold",
     color: "#0066CC",

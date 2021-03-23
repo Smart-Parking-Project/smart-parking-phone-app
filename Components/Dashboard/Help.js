@@ -19,7 +19,45 @@ export default function Help() {
       </View>
 
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <View style={styles.insideFooter}></View>
+        <View style={styles.insideFooter}>
+          <View>
+            <View style={{ padding: 5 }}></View>
+            <Text style={styles.text}>
+              1. Press the enter button to enter the lot. This will start the
+              timer.
+            </Text>
+
+            <View style={{ padding: 5 }}></View>
+
+            <View style={{ padding: 1 }}>
+              <Text style={styles.text}>
+                2. Use the parking map to find an empty spot. A blue spot means
+                it is full while a white spot is empty.
+              </Text>
+            </View>
+
+            <View style={{ padding: 5 }}></View>
+
+            <View style={{ padding: 1 }}>
+              <Text style={styles.text}>
+                3. Once you are done parking, press the stop button on the
+                dashboard. This will stop the timer and redirect to payment.
+              </Text>
+            </View>
+
+            <View style={{ padding: 5 }}></View>
+            <View style={{ padding: 1 }}>
+              <Text style={styles.text}>4. Pay for parking.</Text>
+            </View>
+
+            <View style={{ padding: 5 }}></View>
+            <View style={{ padding: 1 }}>
+              <Text style={styles.text}>
+                5. Press the exit button to leave the lot.
+              </Text>
+            </View>
+          </View>
+        </View>
       </Animatable.View>
     </View>
   );
@@ -46,8 +84,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    textAlign: "center",
-    fontWeight: "bold",
+    color: "#0066CC",
   },
 
   errorText: {
@@ -95,31 +132,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 30,
   },
-  text: {
-    fontSize: 20,
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "white",
-  },
-
-  textInput: {
-    borderColor: "black",
-    borderWidth: 1,
-    padding: 15,
-    color: "black",
-  },
-
-  text_footer: {
-    color: "black",
-    fontSize: 18,
-  },
-
-  total: {
-    color: "black",
-    fontSize: 20,
-    textAlign: "center",
-    fontWeight: "bold",
-  },
 
   action: {
     flexDirection: "row",
@@ -129,22 +141,11 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
   },
 
-  textInput1: {
-    flex: 1,
-
-    paddingLeft: 10,
-    color: "black",
-  },
-
   button: {
     alignItems: "center",
     marginTop: 50,
   },
 
-  textSign: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
   buttonLogin: {
     marginTop: 4,
     paddingTop: 15,

@@ -279,7 +279,7 @@ export default function Dashboard({ navigation }) {
         <Image source={require("../../assets/1.png")}></Image>
       </View> */}
       <View style={{ padding: 50 }}></View>
-      <View style={{ padding: 30 }}></View>
+      <View style={{ padding:35 }}></View>
       <Text style={styles.text4}>Press the button below to enter the lot</Text>
       <View style={{ padding: 5 }}></View>
       <TouchableOpacity

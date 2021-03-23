@@ -17,6 +17,8 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import TabNavigator from "./Components/Dashboard/TabNavigator";
 import { LogBox } from "react-native";
 import Exit from "./Components/Dashboard/Exit";
+import Error from "./Components/RegisterPage/Error";
+
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
 
@@ -78,6 +80,7 @@ export default function App() {
               headerShown: false,
             }}
           ></Stack.Screen>
+          <Stack.Screen name="Error" component={Error}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     </ApolloProvider>

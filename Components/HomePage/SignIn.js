@@ -66,7 +66,8 @@ export default function SignIn({ navigation }) {
   }
 
   if (error) {
-    return <Text>Error: {error.message}</Text>;
+    navigation.navigate("Error", { error: error.message });
+    //return <Text>Error: {error.message}</Text>;
   }
 
   return (

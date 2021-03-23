@@ -10,6 +10,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import * as Animatable from "react-native-animatable";
 import Feather from "react-native-vector-icons/Feather";
+import { ScrollView } from "react-native-gesture-handler";
 
 const RegisterSchema = yup.object({
   name: yup.string(),
@@ -36,134 +37,125 @@ export default function Payment({ route, navigation }) {
       </View>
 
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <View style={styles.insideFooter}>
-          <View>
-            <Text style={styles.total}> Total: {payAmount}</Text>
+        <ScrollView>
+          <View style={styles.insideFooter}>
+            <View>
+              <Text style={styles.total}> Total: {payAmount}</Text>
+            </View>
+
+            <View style={{ padding: 5 }}></View>
+            <View>
+              <Formik
+                initialValues={{
+                  name: " ",
+                  cardNumber: " ",
+                  expiryDateMonthAndYear: " ",
+                  securityCode: " ",
+                }}
+                validationSchema={RegisterSchema}
+                onSubmit={(values, actions) => {
+                  console.log(values);
+                  actions.resetForm();
+                  navigation.navigate("Exit", {
+                    payAmount: payAmount,
+                    enterDate: enterDate,
+                    enterTime: enterTime,
+                    exitDate: exitDate,
+                    exitTime: exitTime,
+                    elapsedTime: elapsedTime,
+                  });
+                }}
+              >
+                {(props) => (
+                  <View>
+                    <View>
+                      <Text style={styles.text_footer}>Name</Text>
+
+                      <View style={styles.action}>
+                        <Feather name="user" color="black" size={20} />
+
+                        <TextInput
+                          style={styles.textInput1}
+                          placeholder="Name"
+                          placeholderTextColor="black"
+                          onChangeText={props.handleChange("name")}
+                          value={props.values.name}
+                          onBlur={props.handleBlur("name")}
+                        ></TextInput>
+                      </View>
+                    </View>
+
+                    <View style={{ padding: 5 }}></View>
+
+                    <View>
+                      <Text style={styles.text_footer}>Card Number</Text>
+
+                      <View style={styles.action}>
+                        <TextInput
+                          style={styles.textInput1}
+                          placeholder="Card Number"
+                          onChangeText={props.handleChange("cardNumber")}
+                          value={props.values.cardNumber}
+                          onBlur={props.handleBlur("cardNumber")}
+                        ></TextInput>
+                      </View>
+                    </View>
+
+                    <View style={{ padding: 5 }}></View>
+
+                    <View>
+                      <Text style={styles.text_footer}>
+                        Expiry Date (mm/yy)
+                      </Text>
+                      <View style={styles.action}>
+                        <TextInput
+                          style={styles.textInput1}
+                          placeholder="Expiry Date (mm/yy)"
+                          placeholderTextColor="black"
+                          onChangeText={props.handleChange(
+                            "expiryDateMonthAndYear"
+                          )}
+                          value={props.values.expiryDateMonthAndYear}
+                          onBlur={props.handleBlur("expiryDateMonthAndYear")}
+                        ></TextInput>
+                      </View>
+                    </View>
+
+                    <View style={{ padding: 5 }}></View>
+
+
+                    <View>
+                      <Text style={styles.text_footer}>Security Code</Text>
+                      <View style={styles.action}>
+                        <Feather name="lock" color="black" size={20} />
+                        <TextInput
+                          style={styles.textInput1}
+                          placeholder="Security Code"
+                          onChangeText={props.handleChange("securityCode")}
+                          value={props.values.securityCode}
+                          onBlur={props.handleBlur("securityCode")}
+                          secureTextEntry={true}
+                        ></TextInput>
+                      </View>
+                    </View>
+
+                    <View style={{ padding: 3 }}></View>
+                    <View style={{ padding:3 }}></View>
+
+                    <View>
+                      <TouchableOpacity
+                        style={styles.buttonLogin}
+                        onPress={props.handleSubmit}
+                      >
+                        <Text style={styles.text}>Pay</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                )}
+              </Formik>
+            </View>
           </View>
-
-          <View style={{ padding: 5 }}></View>
-          <View>
-            <Formik
-              initialValues={{
-                name: " ",
-                cardNumber: " ",
-                expiryDateMonth: " ",
-                expiryDateYear: " ",
-                securityCode: " ",
-              }}
-              validationSchema={RegisterSchema}
-              onSubmit={(values, actions) => {
-                console.log(values);
-                actions.resetForm();
-                navigation.navigate("Exit", {
-                  payAmount: payAmount,
-                  enterDate: enterDate,
-                  enterTime: enterTime,
-                  exitDate: exitDate,
-                  exitTime: exitTime,
-                  elapsedTime: elapsedTime,
-                });
-              }}
-            >
-              {(props) => (
-                <View>
-                  <View>
-                    <Text style={styles.text_footer}>Name</Text>
-
-                    <View style={styles.action}>
-                      <Feather name="user" color="black" size={20} />
-
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="Name"
-                        placeholderTextColor="black"
-                        onChangeText={props.handleChange("name")}
-                        value={props.values.name}
-                        onBlur={props.handleBlur("name")}
-                      ></TextInput>
-                    </View>
-                  </View>
-
-                  <View style={{ padding: 3 }}></View>
-
-                  <View>
-                    <Text style={styles.text_footer}>Card Number</Text>
-
-                    <View style={styles.action}>
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="Card Number"
-                        onChangeText={props.handleChange("cardNumber")}
-                        value={props.values.cardNumber}
-                        onBlur={props.handleBlur("cardNumber")}
-                      ></TextInput>
-                    </View>
-                  </View>
-
-                  <View style={{ padding: 3 }}></View>
-
-                  <View>
-                    <Text style={styles.text_footer}>Expiry Date (Month)</Text>
-                    <View style={styles.action}>
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="Expiry Date (Month)"
-                        placeholderTextColor="black"
-                        onChangeText={props.handleChange("expiryDateMonth")}
-                        value={props.values.expiryDateMonth}
-                        onBlur={props.handleBlur("expiryDateMonth")}
-                      ></TextInput>
-                    </View>
-                  </View>
-
-                  <View style={{ padding: 3 }}></View>
-
-                  <View>
-                    <Text style={styles.text_footer}>Expiry Date (Year)</Text>
-                    <View style={styles.action}>
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="Expiry Date (Year)"
-                        onChangeText={props.handleChange("expiryDateYear")}
-                        value={props.values.expiryDateYear}
-                        onBlur={props.handleBlur("expiryDateYear")}
-                      ></TextInput>
-                    </View>
-                  </View>
-
-                  <View style={{ padding: 3 }}></View>
-
-                  <View>
-                    <Text style={styles.text_footer}>Security Code</Text>
-                    <View style={styles.action}>
-                      <Feather name="lock" color="black" size={20} />
-                      <TextInput
-                        style={styles.textInput1}
-                        placeholder="Security Code"
-                        onChangeText={props.handleChange("securityCode")}
-                        value={props.values.securityCode}
-                        onBlur={props.handleBlur("securityCode")}
-                        secureTextEntry={true}
-                      ></TextInput>
-                    </View>
-                  </View>
-
-                  <View style={{ padding: 3 }}></View>
-                  <View style={{ padding: 3 }}></View>
-
-                  <View>
-                    <TouchableOpacity
-                      style={styles.buttonLogin}
-                      onPress={props.handleSubmit}
-                    >
-                      <Text style={styles.text}>Pay</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              )}
-            </Formik>
-          </View>
-        </View>
+        </ScrollView>
       </Animatable.View>
     </View>
   );
