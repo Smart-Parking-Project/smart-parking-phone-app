@@ -10,8 +10,9 @@ import {
 
 import { useState, useEffect } from "react";
 import { Stopwatch, Timer } from "react-native-stopwatch-timer";
-import { cos } from "react-native-reanimated";
+import { cos, set } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useQuery } from "@apollo/client";
 
 import { useMutation, gql } from "@apollo/client";
 
@@ -79,6 +80,17 @@ const END_PARKING_SESSION = gql`
   }
 `;
 
+// const GET_PARKINGSPACE = gql`
+//   query ParkingSpace {
+//     getAllParkingSpace {
+//       id
+//       spaceNumber
+//       parkingLotIdentifier
+//       isOccupied
+//     }
+//   }
+// `;
+
 export default function Dashboard({ navigation }) {
   const [createParking, { data, loading, error }] = useMutation(
     CREATE_PARKING_SESSION
@@ -87,6 +99,10 @@ export default function Dashboard({ navigation }) {
   const [endParking, { data: endP, loading1, error1 }] = useMutation(
     END_PARKING_SESSION
   );
+
+  // const { loading2, error2, data: data1 } = useQuery(GET_PARKINGSPACE, {
+  //   //pollInterval: 500,
+  // });
 
   const parkingSessionID = async (data) => {
     try {
@@ -121,6 +137,16 @@ export default function Dashboard({ navigation }) {
       elapsedTime: elapsedTime,
     });
   }
+
+  // //Parking Space Avalaibilty
+  // let emptyP = 0;
+  // let fullP = 0;
+  // data1.getAllParkingSpace.map((p) =>
+  //   p.isOccupied ? (fullP += 1) : (emptyP += 1)
+  // );
+
+  // console.log(emptyP);
+  // console.log(fullP);
 
   const [isStopwatchStart, setIsStopwatchStart] = useState(false);
   const [resetStopwatch, setResetStopwatch] = useState(false);
@@ -272,14 +298,21 @@ export default function Dashboard({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{ padding: 30 }}>
+      <View style={{ padding: 20 }}>
         <Text style={styles.mainTitle}>Welcome to Smart Parking!</Text>
       </View>
       {/* <View style={{ padding: 10 }}>
         <Image source={require("../../assets/1.png")}></Image>
       </View> */}
-      <View style={{ padding: 50 }}></View>
-      <View style={{ padding:35 }}></View>
+      <View style={{ padding: 25 }}></View>
+      {/* <View style={styles.parkingBorder}>
+        <Text style={styles.text6}>Parking Avalaibilty</Text>
+        <View style={{ padding: 2 }}></View>
+        <Text style={styles.text5}>Empty = {emptyP}</Text>
+        <View style={{ padding: 2 }}></View>
+        <Text style={styles.text5}>Full = {fullP} </Text>
+      </View> */}
+      <View style={{ padding: 75 }}></View>
       <Text style={styles.text4}>Press the button below to enter the lot</Text>
       <View style={{ padding: 5 }}></View>
       <TouchableOpacity
@@ -427,9 +460,15 @@ const styles = StyleSheet.create({
   },
 
   text5: {
-    fontSize: 20,
+    fontSize: 22,
     textAlign: "center",
     color: "#0066CC",
+  },
+  text6: {
+    fontSize: 25,
+    textAlign: "center",
+    color: "#0066CC",
+    fontWeight: "bold",
   },
   enterText: {
     fontSize: 30,
@@ -447,6 +486,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "white",
+  },
+  parkingBorder: {
+    alignContent: "center",
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: "#0066CC",
+    marginLeft: 70,
+    marginRight: 70,
   },
 });
 
