@@ -10,17 +10,11 @@ import {
   Keyboard,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
-import LinearGradient from "react-native-linear-gradient";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { useMutation, gql } from "@apollo/client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import RegisterForm1 from "./RegisterForm1";
-import RegisterForm from "./RegisterForm";
-import { useEffect } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 
 const ADD_NEW_USER = gql`
