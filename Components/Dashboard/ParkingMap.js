@@ -29,16 +29,10 @@ export default function ParkingMap() {
   if (data) {
     const spaces = data["getAllParkingSpace"];
 
-    console.log(spaces[0]["isOccupied"]);
-    // for (const space of spaces) {
-    //   console.log(
-    //     `current state og parking number ${space.spaceNumber} is ${space.isOccupied}`
-    //   );
-    // }
-
     let p1Status = spaces[0]["isOccupied"];
     let p2Status = spaces[1]["isOccupied"];
     let p3Status = spaces[2]["isOccupied"];
+    
 
     let p1Color = p1Status ? "#0066CC" : "white";
     let p2Color = p2Status ? "#0066CC" : "white";
@@ -51,6 +45,7 @@ export default function ParkingMap() {
         </View>
 
         <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+          <Text style={styles.text}>Level 1</Text>
           <View style={styles.footer}>
             <View style={styles.firstRow}>
               <View
@@ -63,7 +58,7 @@ export default function ParkingMap() {
                   borderWidth: 1,
                 }}
               >
-                <Text style={styles.text}>P1</Text>
+                <Text style={styles.text}>A0</Text>
               </View>
               <View
                 style={{
@@ -75,11 +70,12 @@ export default function ParkingMap() {
                   borderWidth: 1,
                 }}
               >
-                <Text style={styles.text}>P2</Text>
+                <Text style={styles.text}>A1</Text>
               </View>
             </View>
 
-            <View style={{ padding: 20 }}></View>
+            <View style={{ padding: 15 }}></View>
+            <View style={{ padding: 5 }}></View>
 
             <View style={styles.firstRow}>
               <View
@@ -92,7 +88,7 @@ export default function ParkingMap() {
                   marginLeft: 50,
                 }}
               >
-                <Text style={styles.text}>P3</Text>
+                <Text style={styles.text}>B0</Text>
               </View>
               <View
                 style={{
@@ -104,7 +100,7 @@ export default function ParkingMap() {
                   marginRight: 50,
                 }}
               >
-                <Text style={styles.text}>P4</Text>
+                <Text style={styles.text}>B1</Text>
               </View>
 
               {/* <View

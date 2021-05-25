@@ -29,6 +29,8 @@ export default function Payment({ route, navigation }) {
     exitTime,
     elapsedTime,
   } = route.params;
+
+  
   //console.log({ amount });
   return (
     <View style={styles.container}>

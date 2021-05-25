@@ -45,6 +45,8 @@ const ADD_NEW_USER = gql`
     }
   }
 `;
+
+
 const RegisterSchema = yup.object({
   username: yup.string(),
   email: yup.string(),

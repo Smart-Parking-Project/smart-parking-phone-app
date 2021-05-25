@@ -30,46 +30,13 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen
-            name="Home"
-            component={HomePage}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen
-            name="LogIn"
-            component={SignIn}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen
-            name="Register"
-            component={SignUp}
-            options={{ headerShown: false }}
-          ></Stack.Screen>
-          <Stack.Screen
-            name="DashboardHome"
-            component={TabNavigator}
-            options={{
-              // headerLeft: null,
-              // headerTitle: null,
-              // headerStyle: { backgroundColor: "#0066CC" },
-              headerShown: false,
-            }}
-          ></Stack.Screen>
+          <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }}></Stack.Screen>
+          <Stack.Screen name="LogIn" component={SignIn} options={{ headerShown: false }} ></Stack.Screen>
+          <Stack.Screen name="Register" component={SignUp} options={{ headerShown: false }}></Stack.Screen>
+          <Stack.Screen name="DashboardHome" component={TabNavigator} options={{ headerShown: false }} ></Stack.Screen>
           <Stack.Screen name="Dashboard" component={Dashboard}></Stack.Screen>
-          <Stack.Screen
-            name="Payment"
-            component={Payment}
-            options={{
-              headerShown: false,
-            }}
-          ></Stack.Screen>
-          <Stack.Screen
-            name="Exit"
-            component={Exit}
-            options={{
-              headerShown: false,
-            }}
-          ></Stack.Screen>
+          <Stack.Screen name="Payment" component={Payment} options={{ headerShown: false }} ></Stack.Screen>
+          <Stack.Screen name="Exit" component={Exit} options={{ headerShown: false }} ></Stack.Screen>
           <Stack.Screen name="Error" component={Error}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
@@ -78,3 +45,5 @@ export default function App() {
 }
 
 AppRegistry.registerComponent("Smart Parking", () => App);
+
+

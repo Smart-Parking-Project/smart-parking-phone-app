@@ -113,6 +113,7 @@ export default function SignIn({ navigation }) {
                         value={props.values.username}
                         onBlur={props.handleBlur("username")}
                       ></TextInput>
+                      
                     </View>
                   </View>
 
@@ -135,6 +136,7 @@ export default function SignIn({ navigation }) {
                       ></TextInput>
                     </View>
                   </View>
+
 
                   <View style={{ padding: 10 }}></View>
                   <View>

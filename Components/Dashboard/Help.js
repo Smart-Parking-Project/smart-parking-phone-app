@@ -36,6 +36,9 @@ export default function Help() {
               </Text>
             </View>
 
+            
+
+
             <View style={{ padding: 5 }}></View>
 
             <View style={{ padding: 1 }}>

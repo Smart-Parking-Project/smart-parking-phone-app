@@ -1,18 +1,10 @@
-//import * as React from "react";
 import React, { useEffect } from "react";
-import { Formik } from "formik";
-import * as yup from "yup";
-import { useState } from "react";
 import {
   View,
   Text,
-  Button,
   StyleSheet,
-  TextInput,
-  Image,
   ImageBackground,
   Keyboard,
-  TouchableOpacityBase,
 } from "react-native";
 
 import {
@@ -29,19 +21,6 @@ export default function HomePage({ navigation }) {
           <Text style={styles.mainTitle}>Smart Parking </Text>
         </View>
         <View style={{ padding: 50 }}></View>
-        {/* <View>
-          <Image source={require("../../assets/2.png")}></Image>
-        </View> */}
-
-        {/* <View>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("DashboardHome")}
-          >
-            <Text style={styles.text}>Test</Text>
-          </TouchableOpacity>
-        </View> */}
-
         <View style={{ padding: 50 }}></View>
         <View
           style={{
@@ -75,12 +54,6 @@ export default function HomePage({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  mainTitle: {
-    fontSize: 70,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "white",
-  },
   button: {
     marginTop: 10,
     paddingTop: 10,
@@ -95,6 +68,21 @@ const styles = StyleSheet.create({
     borderColor: "white",
     alignContent: "center",
   },
+
+  text: {
+    fontSize: 30,
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "white",
+  },
+
+  mainTitle: {
+    fontSize: 70,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "white",
+  },
+
   buttonLogin: {
     marginTop: 4,
     paddingTop: 10,
@@ -106,13 +94,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "white",
     alignContent: "center",
-  },
-
-  text: {
-    fontSize: 30,
-    textAlign: "center",
-    fontWeight: "bold",
-    color: "white",
   },
 
   textInput: {
